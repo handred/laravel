@@ -17,9 +17,7 @@
             <tbody>
                 @foreach ($pages as $page)
                 <tr>
-                    <td class="table-text"><div><a href='{{ url('admin/edit/'.$page->id) }}'>{{ $page->name }}</a></div></td>
-
-                    <!-- Task Delete Button -->
+                    <td class="table-text"><div><a href='{{ url('admin/'.$page->id.'/edit') }}'>{{ $page->name }}</a></div></td>
                     <td>
                         <form action="{{ url('admin/'.$page->id) }}" method="POST">
                             {{ csrf_field() }}
