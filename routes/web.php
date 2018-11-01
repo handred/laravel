@@ -18,6 +18,9 @@ use \App\Page;
 use \App\Test\Test;
 use Illuminate\Http\Request;
 
+Route::resource('admin', 'AdminController')->middleware('auth');
+
+
 Route::group(['middleware' => 'auth'], function() {
 
     Route::post('/admin/addpage', function (Request $request) {
