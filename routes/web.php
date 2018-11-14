@@ -31,7 +31,7 @@ Route::get('/', function () {
 });
 
 Route::get('/chat', function () {
-    return view('chat');
+    return view('chat',['urldata'=>json_encode(['test1'=>'test1-text','test2'=>'test2-text','test3'=>'test3-text'])]);
 });
 
 Auth::routes();

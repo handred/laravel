@@ -6,7 +6,23 @@
                     <div class="card-header">Example Component Header</div>
 
                     <div class="card-body">
-                        Vue compoytyn Content
+                        Vue component Content
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Индекс</th>
+                                    <th>Ключ</th>
+                                    <th>Значение</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for = "(value, key, index) in urldata" >
+                                    <td>{{index}}</td>
+                                    <td>{{key}}</td>
+                                    <td>{{value}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -17,8 +33,16 @@
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        props: ['urldata'],
+        mounted: function () {
+            console.log('Component mounted.');
+            this.update();
+        },
+        methods: {
+            update: function () {
+                console.log('update');
+                console.log(this.urldata);
+            }
         }
     }
 </script>

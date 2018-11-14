@@ -13,7 +13,7 @@
     </head>
     <body>
         <div id="app">
-            <test-component></test-component>
+            <test-component :urldata="{{$urldata}}"></test-component>
         </div>
         <script src="{{asset('js/app.js')}}"></script>
     </body>
