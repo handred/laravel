@@ -14,6 +14,8 @@
     <body>
         <div id="app">
             <test-component :urldata="{{$urldata}}"></test-component>
+            
+            <ajax-component></ajax-component>
         </div>
         <script src="{{asset('js/app.js')}}"></script>
     </body>

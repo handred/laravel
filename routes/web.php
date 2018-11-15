@@ -30,9 +30,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/chat', function () {
-    return view('chat',['urldata'=>json_encode(['test1'=>'test1-text','test2'=>'test2-text','test3'=>'test3-text'])]);
-});
+Route::get('/chat', 'ChatController@index');
+Route::get('/chat/json', 'ChatController@json');
+
 
 Auth::routes();
 
