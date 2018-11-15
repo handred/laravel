@@ -14,9 +14,7 @@ class ChatController extends Controller {
     }
     
     public function json() {
-        sleep(1);
-        
-        return Chat::data();
+        return Chat::pages();
 //        $date = new Chat();
 //        $date->name = date("Y-m-d H:i:s");
 //        $date->time = time();

@@ -14,7 +14,7 @@ class Chat extends Model {
         return ['ffff'=> self::eeee, 'test1' => 'test1-text', 'test2' => 'test2-text', 'test3' => 'test3-text'];
     }
     
-   static function page() {
+   static function pages() {
         return Page::all(['id', 'name']);
     }
 }

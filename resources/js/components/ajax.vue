@@ -18,10 +18,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for = "(value, key, index) in urldata" >
+                                <tr v-for = "(value, index) in urldata" >
                                     <td>{{index}}</td>
-                                    <td>{{key}}</td>
-                                    <td>{{value}}</td>
+                                    <td>{{value.id}}</td>
+                                    <td>{{value.name}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -50,6 +50,8 @@
                 //this.id++;
                 this.is_refresh=true;
                 axios.get('/chat/json').then((msg)=>{
+                    console.log('callback json');
+                    console.log(msg.data);
                     this.urldata = msg.data;
                     this.is_refresh=false;
                     this.id++;
