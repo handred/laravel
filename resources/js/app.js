@@ -4,6 +4,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+window.io = require('socket.io-client');
+
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('test-component', require('./components/Test.vue'));

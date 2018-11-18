@@ -7,14 +7,14 @@
 
                     <div class="card-body">
                         <line-chart :chart-data="data" :height="200" :options="{responsive:true, maintainAspectRation:true}"></line-chart>
-                    
+
                         <input type ="checkbox" v-model="realtime" />
                         <input type="text" v-model="label" />
                         <input type="text" v-model="sale" />
-                                  
-                    <button @click="senddata"  :disabled="is_refresh" >Sendata {{id}}</button>
+
+                        <button @click="senddata"  :disabled="is_refresh" >Sendata {{id}}</button>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -32,45 +32,49 @@
                 },
                 data: function () {
                     return {
-                        id:0,
-                        realtime:false,
-                        label:'',
-                        sale:500,
+                        id: 0,
+                        realtime: false,
+                        label: '',
+                        sale: 500,
                         data: [],
-                        is_refresh:false
+                        is_refresh: false
                     };
                 },
                 mounted: function () {
+                    var socket = io('localhost:3000');
+                    socket.on('chartevent:App\\Events\\NewEvent', function (data) {
+                        this.data = data.result;
+                    }).bind(this);
                     this.update();
                 },
                 methods: {
                     update: function () {
                         this.id++;
-                        this.is_refresh=true;
+                        this.is_refresh = true;
                         axios.get('/chat/neweventstart').then((msg) => {
                             console.log(msg.data);
                             this.data = msg.data;
-                            this.is_refresh=false;
+                            this.is_refresh = false;
                         });
                     },
-                    
+
                     senddata: function () {
                         var params = {
-                            method:'get', 
-                            url:'/chat/newevent',
-                            params:{label:this.label, sale:this.sale, realtime:this.realtime}
+                            method: 'get',
+                            url: '/chat/newevent',
+                            params: {label: this.label, sale: this.sale, realtime: this.realtime}
                         };
-                        
+
                         this.id++;
-                        this.is_refresh=true;
+                        this.is_refresh = true;
                         axios(params).then((msg) => {
                             console.log(msg.data);
                             this.data = msg.data;
-                            this.is_refresh=false;
+                            this.is_refresh = false;
                         });
                     }
-                    
-                    
+
+
                 }
             }
 </script>
