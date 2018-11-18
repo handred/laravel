@@ -69,13 +69,13 @@ class Chart {
             $result['labels'][] = $request->input('label');
             $result['datasets'][0]['data'][] = (int)$request->input('sale');
         }
-
+        
         if ($request->has('realtime') && $request->input('realtime') == 'true') {
-            //\App\events\NewEvent
-            event(new \App\events\NewEvent($result));
-            
+            event(new \App\Events\NewEvent($result));
         }
+        
         return $result;
+        
     }
 
 }

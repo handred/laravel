@@ -45728,11 +45728,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     mounted: function mounted() {
-        var socket = io('localhost:3000');
-        socket.on('chartevent:App\\Events\\NewEvent', function (data) {
-            this.data = data.result;
-        }).bind(this);
+
         this.update();
+        var socket = io('localhost:3000');
+        var App = this;
+        socket.on('chartevent:App\\Events\\NewEvent', function (data) {
+            console.log(data);
+            //App.data = data.result;
+        });
     },
     methods: {
         update: function update() {
