@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Chat;
-use App\Chart;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use \App\Chat;
+use \App\Chart;
+use \Illuminate\Http\Request;
+//use \Illuminate\Support\Facades\Validator;
 
 class ChatController extends Controller {
 
@@ -19,10 +19,19 @@ class ChatController extends Controller {
     }
 
     public function chartdata() {
+        return Chart::startdata();
+    }
+    
+    public function neweventstart() {
         return Chart::data();
     }
+    
     public function piechartdata() {
         return Chart::piedata();
+    }
+    
+    public function newevent(\Illuminate\Http\Request $request) {
+        return Chart::eventdata($request);
     }
 
 }

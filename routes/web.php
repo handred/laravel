@@ -34,6 +34,8 @@ Route::get('/chat', 'ChatController@index');
 Route::get('/chat/json', 'ChatController@json');
 Route::get('/chat/chartdata', 'ChatController@chartdata');
 Route::get('/chat/piechartdata', 'ChatController@piechartdata');
+Route::get('/chat/newevent', 'ChatController@newevent');
+Route::get('/chat/neweventstart', 'ChatController@neweventstart');
 
 
 Auth::routes();

@@ -10,6 +10,7 @@
     </head>
     <body>
         <div id="app">
+            <chartevent-component></chartevent-component>
             <test-component :urldata="{{$urldata}}"></test-component>
             <ajax-component></ajax-component>
             <chartline-component></chartline-component>
