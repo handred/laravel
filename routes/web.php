@@ -32,6 +32,7 @@ Route::get('/', function () {
 
 Route::get('/chat', 'ChatController@index');
 Route::get('/chat/json', 'ChatController@json');
+Route::get('/chat/chartdata', 'ChatController@chartdata');
 
 
 Auth::routes();
