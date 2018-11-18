@@ -13,6 +13,7 @@
             <test-component :urldata="{{$urldata}}"></test-component>
             <ajax-component></ajax-component>
             <chartline-component></chartline-component>
+            <chartpie-component></chartpie-component>
         </div>
         <script src="{{asset('js/app.js')}}"></script>
     </body>

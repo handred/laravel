@@ -20,5 +20,34 @@ class Chart {
                 ['label' => 'Продажи 3', 'backgroundColor' => 'rgba(55,0,200,0.5)', 'data' => self::rand()],
         ]);
     }
+    
+     static function piedata() {
+        return array(
+            'labels' => ['Апрель', 'Май', 'Июнь', 'Июль'],
+            'datasets' => [
+                ['label' => 'Продажи 1', 
+                    'backgroundColor' => [
+                        'rgba(255,40,40,0.5)',
+                        'rgba(255,250,0,0.5)',
+                        'rgba(255,0,250,0.5)',
+                        'rgba(205,100,0,0.5)'], 
+                    'data' => self::rand()],
+                ['label' => 'Продажи 2', 
+                    'backgroundColor' => [
+                        'rgba(255,40,40,0.5)',
+                        'rgba(255,250,0,0.5)',
+                        'rgba(255,0,250,0.5)',
+                        'rgba(205,100,0,0.5)'], 
+                    'data' => self::rand()],
+                ['label' => 'Продажи 3', 
+                    'backgroundColor' => [
+                        'rgba(255,40,40,0.5)',
+                        'rgba(255,250,0,0.5)',
+                        'rgba(255,0,250,0.5)',
+                        'rgba(205,100,0,0.5)'], 
+                    'data' => self::rand()],
+
+        ]);
+    }
 
 }

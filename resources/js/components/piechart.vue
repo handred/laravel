@@ -3,14 +3,14 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card card-default">
-                    <div class="card-header">LINE CHART Component Header</div>
+                    <div class="card-header">PIE CHART Component Header</div>
 
                     <div class="card-body">
-                        <line-chart :chart-data="data" :height="200" :options="{responsive:true, maintainAspectRation:true}"></line-chart>
-                    
-                    <button @click="update"  :disabled="is_refresh" >reload {{id}}</button>
+                        <pie-chart :chart-data="data" :height="200" :options="{responsive:true, maintainAspectRation:true}"></pie-chart>
+
+                        <button @click="update"  :disabled="is_refresh" >reload {{id}}</button>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -20,17 +20,17 @@
 
 <script>
 
-    import LineChart from '../linechart.js'
+    import PieChart from '../piechart.js'
 
             export default {
                 components: {
-                    LineChart
+                    PieChart
                 },
                 data: function () {
                     return {
-                        id:0,
+                        id: 0,
                         data: [],
-                        is_refresh:false
+                        is_refresh: false
                     };
                 },
                 mounted: function () {
@@ -39,11 +39,11 @@
                 methods: {
                     update: function () {
                         this.id++;
-                        this.is_refresh=true;
-                        axios.get('/chat/chartdata').then((msg) => {
+                        this.is_refresh = true;
+                        axios.get('/chat/piechartdata').then((msg) => {
                             console.log(msg.data);
                             this.data = msg.data;
-                            this.is_refresh=false;
+                            this.is_refresh = false;
                         });
                     }
                 }

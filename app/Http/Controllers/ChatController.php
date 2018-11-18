@@ -21,5 +21,8 @@ class ChatController extends Controller {
     public function chartdata() {
         return Chart::data();
     }
+    public function piechartdata() {
+        return Chart::piedata();
+    }
 
 }
