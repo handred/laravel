@@ -45734,7 +45734,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var App = this;
         socket.on('chartevent:App\\Events\\NewEvent', function (data) {
             console.log(data);
-            //App.data = data.result;
+            App.data = data.result;
         });
     },
     methods: {

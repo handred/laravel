@@ -10,7 +10,7 @@ redis.on('message', function (channel, message) {
     console.log('Message recieved: ' + message);
     console.log('Channel: ' + channel);
     message = JSON.parse(message);
-    io.emit(channel + ':' + message.event, message.datas);
+    io.emit(channel + ':' + message.event, message.data);
 });
 
 http.listen(3000, function () {
