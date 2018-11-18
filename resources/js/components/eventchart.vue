@@ -12,7 +12,7 @@
                         <input type="text" v-model="label" />
                         <input type="text" v-model="sale" />
                                   
-                    <button @click="senddata"  :disabled="is_refresh" >reload {{id}}</button>
+                    <button @click="senddata"  :disabled="is_refresh" >Sendata {{id}}</button>
                     </div>
                     
                 </div>

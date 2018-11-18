@@ -45887,7 +45887,7 @@ var render = function() {
                   attrs: { disabled: _vm.is_refresh },
                   on: { click: _vm.senddata }
                 },
-                [_vm._v("reload " + _vm._s(_vm.id))]
+                [_vm._v("Sendata " + _vm._s(_vm.id))]
               )
             ],
             1
