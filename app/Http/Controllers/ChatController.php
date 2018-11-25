@@ -33,5 +33,9 @@ class ChatController extends Controller {
     public function newevent(Request $request) {
         return Chart::eventdata($request);
     }
+    
+    public function sendmessage(Request $request) {
+        return Chat::send($request);
+    }
 
 }

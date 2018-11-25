@@ -10,6 +10,7 @@
     </head>
     <body>
         <div id="app">
+            <chat-component></chat-component>
             <chartevent-component></chartevent-component>
             <test-component :urldata="{{$urldata}}"></test-component>
             <ajax-component></ajax-component>

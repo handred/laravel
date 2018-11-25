@@ -18,6 +18,7 @@ io.on('connection', function (socket) {
 
 var redis = new Redis();
 redis.subscribe('chartevent');
+
 redis.on('message', function (channel, message) {
     console.log('Message recieved: ' + message);
     console.log('Channel: ' + channel);
