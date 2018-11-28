@@ -15,15 +15,13 @@
                 var opt = {w: 15, h: 15, x: 150, y: 150, ctx: null, width: 450, height: 350};
 
                 var line = [[opt.x, opt.y]];
-                
+
                 var directions = {
-                        'Left': [-1, 0],
-                        'Right': [1, 0],
-                        'Up': [0, -1],
-                        'Down': [0, 1],
-                    };
-
-
+                    'Left': [-1, 0],
+                    'Right': [1, 0],
+                    'Up': [0, -1],
+                    'Down': [0, 1],
+                };
 
                 function ctx() {
                     if (opt.ctx) {
@@ -42,26 +40,19 @@
                 }
 
                 function rect(x, y) {
-
                     if (x > opt.width) {
                         x = 0;
                     }
-
                     if (y > opt.height) {
                         y = 0;
                     }
-
                     if (x < 0) {
                         x = opt.width;
                     }
-
                     if (y < 0) {
                         y = opt.height;
                     }
-
-                    //console.log(x+' - '+y, opt.width, opt.height);
                     ctx().fillRect(x, y, opt.w, opt.h);
-
                     return [x, y];
                 }
 
@@ -70,26 +61,40 @@
                 }
 
                 function step() {
-                    return [opt.x + opt.w*directions[direction][0], opt.y + opt.h*directions[direction][1]];
+                    return [opt.x + opt.w * directions[direction][0], opt.y + opt.h * directions[direction][1]];
+                }
+
+                function rabbit() {
+                    return rect(
+                            Math.floor(opt.width * Math.random() / opt.w) * opt.w,
+                            Math.floor(opt.height * Math.random() / opt.h) * opt.h
+                            );
                 }
 
                 function start() {
                     setInterval(function () {
                         var next = step();
-                        line.push([opt.x, opt.y] = rect(next[0], next[1]));
+                        next = rect(next[0], next[1]);
+                        line.push([opt.x, opt.y] = next);
                         clear(line[0][0], line[0][1]);
-                        line.shift();
+                        if (next[0] == rabbit_pos[0] && next[1] == rabbit_pos[1]) {
+                            rabbit_pos = rabbit();
+                        } else {
+                            line.shift();
+                        }
                     }, 80);
-
                 }
 
                 window.onkeypress = function (e) {
-                    console.log(e);
-                    var key = e.key.replace('Arrow', '');;
-                    if(!directions[key]){return;}
+                    //console.log(e);
+                    var key = e.key.replace('Arrow', '');
+                    if (!directions[key]) {
+                        return;
+                    }
                     direction = key;
                 }
 
+                var rabbit_pos = rabbit();
                 start();
             }
 
