@@ -12,9 +12,18 @@
             function snake() {
                 var direction = 'Right';
 
-                var opt = {w: 15, h: 15, x: 150, y: 150, ctx: null, width: 650, height: 350};
-                
+                var opt = {w: 15, h: 15, x: 150, y: 150, ctx: null, width: 450, height: 350};
+
                 var line = [[opt.x, opt.y]];
+                
+                var directions = {
+                        'Left': [-1, 0],
+                        'Right': [1, 0],
+                        'Up': [0, -1],
+                        'Down': [0, 1],
+                    };
+
+
 
                 function ctx() {
                     if (opt.ctx) {
@@ -34,11 +43,11 @@
 
                 function rect(x, y) {
 
-                    if (x >= opt.width) {
+                    if (x > opt.width) {
                         x = 0;
                     }
 
-                    if (y >= opt.height) {
+                    if (y > opt.height) {
                         y = 0;
                     }
 
@@ -56,33 +65,29 @@
                     return [x, y];
                 }
 
-                function clear(x,y) {
+                function clear(x, y) {
                     ctx().clearRect(x, y, opt.w, opt.h);
                 }
 
                 function step() {
-                    var directions = {
-                        'Left': [opt.x - opt.w, opt.y],
-                        'Right': [opt.x + opt.w, opt.y],
-                        'Up': [opt.x, opt.y - opt.h],
-                        'Down': [opt.x, opt.y + opt.h],
-                    };
-                    return directions[direction];
+                    return [opt.x + opt.w*directions[direction][0], opt.y + opt.h*directions[direction][1]];
                 }
-                
+
                 function start() {
                     setInterval(function () {
                         var next = step();
-                        line.push(next);
-                        [opt.x, opt.y] = rect(next[0], next[1]);
-                        clear(line[0][0],line[0][1]);
+                        line.push([opt.x, opt.y] = rect(next[0], next[1]));
+                        clear(line[0][0], line[0][1]);
                         line.shift();
                     }, 80);
 
                 }
 
                 window.onkeypress = function (e) {
-                    direction = e.key.replace('Arrow', '');
+                    console.log(e);
+                    var key = e.key.replace('Arrow', '');;
+                    if(!directions[key]){return;}
+                    direction = key;
                 }
 
                 start();
