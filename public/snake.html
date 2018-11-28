@@ -85,11 +85,10 @@
                         } else {
                             line.shift();
                         }
-                    }, 80);
+                    }, 120);
                 }
 
                 window.onkeydown = function (e) {
-                    console.log(e);
                     var key = e.key.replace('Arrow', '');
                     if (!directions[key]) {
                         return;
