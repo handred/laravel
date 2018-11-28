@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <style>
+            canvas{ border: solid 1px #666;}
+        </style>
+    </head>
+    <body onload="snake();">
+        <canvas id="canvas"></canvas>
+
+        <script>
+
+            function snake() {
+                var direction = 'Right';
+
+                var opt = {w: 15, h: 15, x: 150, y: 150, ctx: null, width: 650, height: 350};
+                
+                var line = [[opt.x, opt.y]];
+
+                function ctx() {
+                    if (opt.ctx) {
+                        return opt.ctx;
+                    }
+
+                    var canvas = document.getElementById('canvas');
+                    if (!canvas.getContext) {
+                        return;
+                    }
+                    canvas.width = opt.width;
+                    canvas.height = opt.height;
+                    canvas.focus();
+                    return opt.ctx = canvas.getContext('2d');
+
+                }
+
+                function rect(x, y) {
+
+                    if (x >= opt.width) {
+                        x = 0;
+                    }
+
+                    if (y >= opt.height) {
+                        y = 0;
+                    }
+
+                    if (x < 0) {
+                        x = opt.width;
+                    }
+
+                    if (y < 0) {
+                        y = opt.height;
+                    }
+
+                    //console.log(x+' - '+y, opt.width, opt.height);
+                    ctx().fillRect(x, y, opt.w, opt.h);
+
+                    return [x, y];
+                }
+
+                function clear(x,y) {
+                    ctx().clearRect(x, y, opt.w, opt.h);
+                }
+
+                function step() {
+                    var directions = {
+                        'Left': [opt.x - opt.w, opt.y],
+                        'Right': [opt.x + opt.w, opt.y],
+                        'Up': [opt.x, opt.y - opt.h],
+                        'Down': [opt.x, opt.y + opt.h],
+                    };
+                    return directions[direction];
+                }
+                
+                function start() {
+                    setInterval(function () {
+                        var next = step();
+                        line.push(next);
+                        [opt.x, opt.y] = rect(next[0], next[1]);
+                        clear(line[0][0],line[0][1]);
+                        line.shift();
+                    }, 80);
+
+                }
+
+                window.onkeypress = function (e) {
+                    direction = e.key.replace('Arrow', '');
+                }
+
+                start();
+            }
+
+
+
+        </script>
+    </body>
+</html>
