@@ -46,7 +46,7 @@
                     if (x > opt.width - opt.w) {
                         x = 0;
                     }
-                    if (y > opt.height  - opt.h) {
+                    if (y > opt.height - opt.h) {
                         y = 0;
                     }
                     if (x < 0) {
@@ -73,23 +73,48 @@
                     return check_xy(opt.x + opt.w * directions[direction][0], opt.y + opt.h * directions[direction][1]);
                 }
 
+
                 function rabbit() {
-                    var x,y;
+                    var x, y;
                     [x, y] = check_xy(Math.floor(opt.width * Math.random() / opt.w) * opt.w,
                             Math.floor(opt.height * Math.random() / opt.h) * opt.h);
+
+                    if (check_collision(x, y)) {
+                        return rabbit();
+                    }
                     ctx().fillStyle = "#0C0";
                     ctx().fillRect(x, y, opt.w, opt.h);
                     return [x, y];
                 }
 
+                function check_collision(x, y) {
+                    var i;
+                    for (i = 0; i < line.length; i++) {
+                        if (x == line[i][0] && y == line[i][1]) {
+                            return i+1;
+                        }
+                    }
+                    return false;
+                }
+
+
                 function start() {
                     setInterval(function () {
                         [opt.x, opt.y] = next_step();
+                        var s = check_collision(opt.x, opt.y);
                         line.push(rect(opt.x, opt.y));
-                        clear(line[0][0], line[0][1]);
+
+                        console.log(s);
+
                         if (opt.x == rabbit_pos[0] && opt.y == rabbit_pos[1]) {
                             rabbit_pos = rabbit();
-                        } else {
+                        } else if(s) {
+                            for (var i = 0; i < s; i++) {
+                                clear(line[i][0], line[i][1]);
+                            }
+                           line.splice(0,s);
+                        }else{
+                            clear(line[0][0], line[0][1]);
                             line.shift();
                         }
                     }, 120);
