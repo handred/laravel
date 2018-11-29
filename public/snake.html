@@ -1,7 +1,7 @@
 <html>
     <head>
         <style>
-            canvas{ border: solid 1px #666;}
+            canvas{ border: solid 1px #666; background: #f5f5f5;}
         </style>
     </head>
     <body onload="snake();">
@@ -13,9 +13,9 @@
                 var direction = 'Right';
 
                 var opt = {w: 15, h: 15, x: 150, y: 150, ctx: null};
-                
-                opt.width = opt.w*40;
-                opt.height = opt.w*25;
+
+                opt.width = opt.w * 40;
+                opt.height = opt.w * 25;
 
                 var line = [[opt.x, opt.y]];
 
@@ -42,19 +42,25 @@
 
                 }
 
-                function rect(x, y) {
-                    if (x > opt.width) {
+                function check_xy(x, y) {
+                    if (x > opt.width - opt.w) {
                         x = 0;
                     }
-                    if (y > opt.height) {
+                    if (y > opt.height  - opt.h) {
                         y = 0;
                     }
                     if (x < 0) {
-                        x = opt.width-opt.w;
+                        x = opt.width - opt.w;
                     }
                     if (y < 0) {
-                        y = opt.height-opt.h;
+                        y = opt.height - opt.h;
                     }
+                    return [x, y];
+                }
+
+                function rect(x, y) {
+                    [x, y] = check_xy(x, y);
+                    ctx().fillStyle = "#c00";
                     ctx().fillRect(x, y, opt.w, opt.h);
                     return [x, y];
                 }
@@ -63,24 +69,25 @@
                     ctx().clearRect(x, y, opt.w, opt.h);
                 }
 
-                function step() {
-                    return [opt.x + opt.w * directions[direction][0], opt.y + opt.h * directions[direction][1]];
+                function next_step() {
+                    return check_xy(opt.x + opt.w * directions[direction][0], opt.y + opt.h * directions[direction][1]);
                 }
 
                 function rabbit() {
-                    return rect(
-                            Math.floor(opt.width * Math.random() / opt.w) * opt.w,
-                            Math.floor(opt.height * Math.random() / opt.h) * opt.h
-                            );
+                    var x,y;
+                    [x, y] = check_xy(Math.floor(opt.width * Math.random() / opt.w) * opt.w,
+                            Math.floor(opt.height * Math.random() / opt.h) * opt.h);
+                    ctx().fillStyle = "#0C0";
+                    ctx().fillRect(x, y, opt.w, opt.h);
+                    return [x, y];
                 }
 
                 function start() {
                     setInterval(function () {
-                        var next = step();
-                        next = rect(next[0], next[1]);
-                        line.push([opt.x, opt.y] = next);
+                        [opt.x, opt.y] = next_step();
+                        line.push(rect(opt.x, opt.y));
                         clear(line[0][0], line[0][1]);
-                        if (next[0] == rabbit_pos[0] && next[1] == rabbit_pos[1]) {
+                        if (opt.x == rabbit_pos[0] && opt.y == rabbit_pos[1]) {
                             rabbit_pos = rabbit();
                         } else {
                             line.shift();
